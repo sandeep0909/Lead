@@ -1,3 +1,3 @@
 class Activity < ActiveRecord::Base
-  belong_to :users
+  belongs_to :contact
 end

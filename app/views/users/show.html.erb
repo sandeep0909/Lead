@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+
+<hr><div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <strong>Logged in User Name:</strong>
+      <%= @user.name %>
+    </div>
+    <div class="col-md-6">
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </div><br>
+  </div>
+</hr>
+  <hr>
+    <h3>
+     <%= link_to 'Create Contact', new_contact_path %>
+    </h3>
+  </hr><br>
+  <hr>
+  List of your contacts
+</hr><br>
+<hr>
+  <ul>
+  <% @user.contacts.each do |c| %>
+    <li>
+    <%= link_to c.name, contact_path(c) %>
+    <%= c.email %>
+    </li>
+  <% end %>
+  </ul>
+</hr>

@@ -1,14 +1,20 @@
 class UsersController < ApplicationController
   before_action :authorize, only: [:show]
-  before_filter :admin_only, :except => :show
+  # before_filter :admin_only, :except => :show
   def index
-    @users = User.all
+    if is_manager?
+      @users = User.all
+    else
+      redirect_to root_path
+    end
   end
 
   def show
-
-    @user = User.find(params[:id])
-
+    if is_manager? || current_user.id == params[:id].to_i
+      @user = User.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -16,29 +22,39 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def create
     @user=User.new(user_params)
     if @user.save
-      redirect_to root_path
+      redirect_to new_session_path
     else
-      redirect_to :new
+      redirect_to users_path
     end
   end
 
   def update
+    @user=User.find(params[:id])
+    if @user.update(user_params)
+    redirect_to users_path
+    else
+    render :edit
+    end
   end
 
   def destroy
+    @user=User.find(params[:id])
+    @user.destroy
+    redirect_to users_path
   end
   private
 
-  def admin_only
-    unless current_user.admin?
-      redirect_to :back, :alert => "Access denied."
-    end
-  end
+  # def admin_only
+  #   unless current_user.admin?
+  #     redirect_to :back, :alert => "Access denied."
+  #   end
+  # end
 
   #strong params: only these fields are allowed from forms:
   private

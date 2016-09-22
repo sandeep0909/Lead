@@ -1,3 +1,5 @@
 class Answer < ActiveRecord::Base
-  belong_to :questions
+  belongs_to :question
+  validates_presence_of :name
+  validates_presence_of :description
 end

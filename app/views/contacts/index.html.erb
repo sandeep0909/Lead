@@ -1,2 +1,5 @@
-<h1>Contacts#index</h1>
-<p>Find me in app/views/contacts/index.html.erb</p>
+<h1>Contact List</h1>
+<% @contacts.each do |c| %>
+<%= link_to c.name, contact_path(c) %><br>
+<%= c.email %><br>
+<% end %>

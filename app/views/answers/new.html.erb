@@ -1,2 +1,8 @@
 <h1>Answers#new</h1>
 <p>Find me in app/views/answers/new.html.erb</p>
+
+<%= form_for [@question, @answer] do |f| %>
+Name: <%= f.text_field :name %><br>
+Answer: <%= f.text_area :description %><br>
+<%= f.submit %>
+<% end %>

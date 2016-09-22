@@ -1,2 +1,9 @@
-<h1>Activities#new</h1>
-<p>Find me in app/views/activities/new.html.erb</p>
+<h3>New activity form</h3>
+<%= form_for @activity do |f| %>
+<h4>Name:</h4><br>
+<%= f. text_field :name %><br>
+<h4>Description:</h4><br>
+<%= f. text_area :description %><br><br>
+<%= f.select(:status, options_for_select([['New', 'New'], ['in-progress', 'in-progress'], ['won', 'won'], ['lost', 'lost']])) %>
+<%= f.submit "Add activities" %>
+<% end %>

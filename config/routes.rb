@@ -1,23 +1,26 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
-
-  get 'sessions/create'
-
-  get 'sessions/destroy'
-
-  #
-  root 'users#index'
-  resources :users
-  resources :contacts
-  resources :activities
-  resources :questions do
-    resources :answers, except: [:update, :destroy]
+  root 'sessions#new'
+  resources :users do
+    resources :contacts
   end
-  resources :answers, only: [:update, :destroy]
+  resources :contacts do
+    resources :activities
+  end
+  resources :questions do
+    resources :answers, except: [:index]
+  end
+  resources :answers, only: [:index]
+  get "/logout" => 'sessions#destroy', as: :logout
+   resources :sessions, only: [:new, :create]
 
-  delete "/logout" => 'sessions#destroy', as: :logout
-  resources :sessions, only: [:new, :create]
+  resources :activities
   #
+
+  # get 'sessions/new'
+  #
+  # get 'sessions/create'
+  #
+  # get 'sessions/destroy'
   # get 'users/show'
   #
   # get 'users/new'

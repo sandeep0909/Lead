@@ -1,2 +1,65 @@
-<h1>Contacts#show</h1>
-<p>Find me in app/views/contacts/show.html.erb</p>
+<hr><div class="row">
+    <div class="col-md-4 col-md-offset-2">
+      <strong>Contact Name:</strong>
+      <%= @contact.name %>
+    </div>
+    <div class="col-md-6">
+      <strong>Email:</strong>
+      <%= @contact.email %>
+    </div><br>
+    <div class="col-md-6">
+      <strong>Phone:</strong>
+      <%= @contact.phone %>
+    </div><br>
+  </div>
+</hr>
+  <hr>
+    <h3>
+     <%= link_to 'Create Activity', new_activity_path %>
+    </h3>
+  </hr><br>
+  <hr>
+  List of your Activities
+</hr><br>
+  <hr>
+    <ul>
+    <% @contact.activities.each do |a| %>
+    <li>
+    <%= a.description %></li>
+    <% end %>
+    </ul>
+  </hr>
+
+  <h3>
+   New Activities:
+  </h3>
+  <%= form_for [@contact, @contact.activities.build] , :html => {class: 'new_contact_activity form-horizontal'} do |f| %>
+      <div class="row"><legend class="col-md-4 col-md-offset-4">Create Activity:</legend></div>
+      <fieldset>
+          <div class="form-group">
+              <%= f.label :name, 'Name*', class: 'col-md-4 control-label' %>
+              <div class="col-md-5">
+                  <%= f.text_field :name, class: 'form-control' %>
+              </div>
+          </div>
+          <div class="form-group">
+              <%= f.label :description, 'Description*', class: 'col-md-4 control-label' %>
+              <div class="col-md-5">
+                  <%= f.text_area :description, class: 'form-control' %>
+              </div>
+          </div>
+          <div class="form-group">
+              <%= f.label :status, 'Status*', class: 'col-md-4 control-label' %>
+              <div class="col-md-5">
+                  <%= f.select(:status, options_for_select([['New', 'New'], ['in-progress', 'in-progress'], ['won', 'won'], ['lost', 'lost']]))%>
+              </div>
+          </div>
+          <div class="form-group">
+              <div class="col-md-8 col-md-offset-4">
+                  <%= f.submit 'Create Activity', class: 'btn btn-success' %>
+              </div>
+          </div>
+      </fieldset>
+  <% end %>
+<%= link_to 'Edit', edit_contact_path(@contact) %> |
+<%= link_to 'Back', user_path(current_user) %>
