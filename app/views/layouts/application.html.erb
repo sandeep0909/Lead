@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>Leads</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <div class="container">
+
   <%= render partial: "shared/navbar" %>
   <% if logged_in? %>
-    <% "Welcome #{current_user.name}" %>
-    <% link_to "Logout", logout_path, {method: "DELETE"} %>
-  <% else %>
-    <% link_to "Login", new_session_path %>
-  <% end %>
+  <div>
+    <table class="table table-bordered">
+      <tr class="success">
+    <%= "Welcome #{current_user.name}" %>
+    </tr>
+    </table>
+    <!-- # link_to "Logout", logout_path, {method: "DELETE"} -->
+    <% else %>
+    <%= link_to "Login", new_session_path %>
+    <% end %>
+
+  </div>
 <%= yield %>
 </div>
 </body>

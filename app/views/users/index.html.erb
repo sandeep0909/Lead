@@ -1,7 +1,32 @@
-<h1>All Users</h1>
-<% @users.each do |u| %>
-<%= link_to u.name, user_path(u) %><br>
-<%= u.email %><br>
-<%= link_to "edit user", edit_user_path(u) %><br>
-<%= link_to "delete user", user_path(u), method: :delete %><br>
-<% end %>
+<h3>All Users</h3>
+<hr>
+  <table class="table table-hover">
+    <tr class="danger" >
+    <th class="col-md-3">User Name</th>
+    <th class="col-md-3">Email</th>
+    <th class="col-md-3">Phone </th>
+    <th class="col-md-1">edit </th>
+    <th class="col-md-2">delete </th>
+    </tr>
+    <% @users.each do |u| %>
+      <tr  class="info">
+        <td class="col-md-4">
+      <%= link_to u.name, user_path(u) %>
+    </td>
+    <td class="col-md-4">
+      <%= u.email %>
+    </td>
+    <td class="col-md-4">
+      <%= u.phone %>
+    </td>
+    <td>
+      <%= link_to '<i class="glyphicon glyphicon-pencil"></i>'.html_safe, edit_user_path(u)%>
+  </td>
+  <td>
+      <%= link_to '<i class="glyphicon glyphicon-remove"></i>'.html_safe, user_path(u), method: :delete %>
+    </td>
+  </tr>
+    <% end %>
+  </table>
+
+</hr>

@@ -1,10 +1,25 @@
-<ul>
+<table class="table table-hover">
+  <tr class="danger" >
+  <th class="col-md-3">Handled by</th>
+  <th class="col-md-3">Activity Name</th>
+  <th class="col-md-3">Description</th>
+  <th class="col-md-3">Status</th>
+  </tr>
 <% @activities.each do |a| %>
-<li>
 <%# link_to a.name, contact_activity_path(@contact,a) %><br>
-Handled by: <%= a.contact.user.name %> 
-<%= link_to a.name, activity_path(a) %><br>
-<%= a.description %><br>
-<%= a.status %><br></li>
+<tr  class="info">
+  <td class="col-md-4">
+    <%= a.contact.user.name %>
+  </td>
+  <td>
+    <%= link_to a.name, activity_path(a) %><br>
+  </td>
+  <td>
+    <%= a.description %><br>
+  </td>
+  <td>
+    <%= a.status %><br></li>
+  </td>
+  </tr>
 <% end %>
-</ul>
+</table>

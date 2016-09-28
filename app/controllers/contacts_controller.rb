@@ -17,6 +17,7 @@ class ContactsController < ApplicationController
   end
 
   def edit
+    @contact = current_user.contacts.find(params[:id])
   end
 
   def create
@@ -29,6 +30,12 @@ class ContactsController < ApplicationController
 
 
   def update
+    @contact=Contact.find(params[:id])
+    if @contact.update(contact_params)
+    redirect_to user_path(current_user)
+    else
+    render :edit
+    end
   end
 
   def destroy

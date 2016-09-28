@@ -1,2 +1,7 @@
-<h1>Contacts#edit</h1>
-<p>Find me in app/views/contacts/edit.html.erb</p>
+<h3>New edit form</h3>
+<%= form_for @contact do |f| %>
+Name: <%= f.text_field :name %>
+Email: <%= f.text_field :email %>
+Phone: <%= f.text_field :phone %>
+<%= f.submit %>
+<% end %>

@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
     @contact = Contact.find(params[:contact_id])
     @activity=@contact.activities.new activity_params
       if @activity.save
-        redirect_to contact_path
+        redirect_to contacts_path
       end
   end
 
